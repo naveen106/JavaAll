@@ -1,4 +1,6 @@
+
 //haven't made this program 10^9 + 7 (to have the value under integer max limit
+package OOPs_I;
 public class CountSetBits {
   public static void main(String[] args) {
     int n = 5;
