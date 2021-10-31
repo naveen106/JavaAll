@@ -1,3 +1,3 @@
-.idea
+*.idea
 /JavaOOps.iml
-compiledCode
+*compiledCode
