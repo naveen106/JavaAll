@@ -8,7 +8,6 @@ public class mergeSort {
       int[] left = new int[mid-start + 1]; //size of the temp left array
       int[] right = new int[end - mid]; //size of the temp right array
 
-
       for (int i = 0; i < left.length; ++i)
         left[i] = arr[start + i];
 
