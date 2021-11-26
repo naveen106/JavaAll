@@ -60,7 +60,6 @@ public class EliminateDuplicates {
     return head;
   }
 
-
   public static void main(String[] args) {
     LinkedListNode<Integer> head = makeList();
     head = removeDuplicates(head);
