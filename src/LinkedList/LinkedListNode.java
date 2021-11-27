@@ -1,6 +1,6 @@
 package LinkedList;
 
-class LinkedListNode<T> {
+public class LinkedListNode<T> {
   T data;
   LinkedListNode<T> next;
 
