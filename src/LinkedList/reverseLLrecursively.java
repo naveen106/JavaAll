@@ -2,7 +2,7 @@ package LinkedList;
 
 public class reverseLLrecursively {
   static LinkedListNode<Integer> makeList() {
-    LinkedListNode<Integer> head = new LinkedListNode<>(5);
+    LinkedListNode<Integer> head = new LinkedListNode<>(4);
     LinkedListNode<Integer> newNode_1 = new LinkedListNode<>(5);
     LinkedListNode<Integer> newNode_2 = new LinkedListNode<>(7);
     LinkedListNode<Integer> newNode_3 = new LinkedListNode<>(8);
@@ -16,29 +16,6 @@ public class reverseLLrecursively {
     newNode_4.next = newNode_5;
     return head;
   }
-  static LinkedListNode<Integer> prev = null;
-  static LinkedListNode<Integer> newHead = null;
-
-  public static LinkedListNode<Integer> reverseLinkedListRec(LinkedListNode<Integer> head) {
-    if(head == null)
-      return head;
-
-    LinkedListNode<Integer> current = head;
-    LinkedListNode<Integer> next = head.next;
-
-    current.next = prev;
-    prev = current;
-//    current = next;
-
-    if(head.next == null){
-      //newHead = head;
-      return head;//newHead;
-    }
-
-    return reverseLinkedListRec(head.next);
-    ///return head;
-  }
-
 
   static void print(LinkedListNode<Integer> head) {
     while (head != null){
@@ -46,6 +23,22 @@ public class reverseLLrecursively {
       head = head.next;
     }
   }
+
+
+  public static LinkedListNode<Integer> reverseLinkedListRec(LinkedListNode<Integer> head){
+    if(head == null)
+      return head;
+
+    if(head.next == null)
+      return head;
+
+    LinkedListNode<Integer> tail = head.next;
+    LinkedListNode<Integer> constNewHead = reverseLinkedListRec(head.next);
+    tail.next=head;
+    head.next=null;
+    return constNewHead;
+  }
+
 
   public static void main(String[] args) {
     LinkedListNode<Integer> head = makeList();
