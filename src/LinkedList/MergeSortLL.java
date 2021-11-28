@@ -62,7 +62,7 @@ public class MergeSortLL {
     head = Solution.mergeSort(head);
 
     while(head.next != null){
-      System.out.print(head + " ");
+      System.out.print(head.data + " ");
       head = head.next;
     }
   }
