@@ -1,8 +1,8 @@
 package LinkedList;
 
- class EvenAfterOdd {
+class EvenAfterOdd {
   public static LinkedListNode<Integer> evenAfterOdd(LinkedListNode<Integer> head) {
-    if(head == null)return head;
+    if(head == null || head.next == null)return head;
 
     LinkedListNode<Integer> evenHead = null;
     LinkedListNode<Integer> oddHead = null;
@@ -16,7 +16,7 @@ package LinkedList;
       oddHead = head;
 
     //if we already have evenHead, then we need to find oddHead now.
-    if(evenHead != null && oddHead == null){
+    if(oddHead == null){
       while(temp.next != null && (temp.next.data ^ 1) != temp.next.data - 1)   //when temp.next.data is not odd
         temp = temp.next;
 
@@ -28,46 +28,47 @@ package LinkedList;
     temp = head;
 
     //if we have oddHead, we need to find evenHead.
-    if(oddHead != null && evenHead == null){
+    if(evenHead == null){
       while(temp.next != null && (temp.next.data ^ 1) != temp.next.data + 1) //when temp.next.data is not even
         temp = temp.next;
 
       if(temp.next != null)
         evenHead = temp.next; //similarly like before, evenHead = temp.next;
     }
-
     if(temp.next == null) return head; //if list is fully even or odd.
-    temp = head;
 
 
-    ////////////Now the main solution of the answer, version_1 //////////////
-
+    ////////////////////////Now the main solution of the answer, version_2 ////////////////////////////////////
     LinkedListNode<Integer> evenTail = evenHead;
-    LinkedListNode<Integer> tempOddHead = oddHead;
-    //   LinkedListNode<Integer> temp2 = null;
+    LinkedListNode<Integer> oddTail = oddHead;
+    LinkedListNode<Integer> pointer = oddHead.next;
 
-    while(tempOddHead.next != null){  //traversing through oddHead because returning list would start from odd Head.
+    while(evenTail.next != null && (evenTail.next.data ^ 1) == evenTail.next.data + 1)
+    evenTail = evenTail.next;
 
-      if((tempOddHead.next.data ^ 1) == tempOddHead.next.data + 1){  //meaning = if tempOddHead.next.data is even
-        //	temp2 = tempOddHead;
+    while(pointer != null){  //traversing through oddHead because returning list would start from odd Head.
 
-        while(evenTail.next != null && (evenTail.next.data ^ 1) != evenTail.next.data - 1) // meaning = if eventail.next.data is odd (traverse evenHead till you find an odd node(which is oddHead))
-          evenTail = evenTail.next; //haven't thought much about it...but what if evenTail.next == null???
+      if((pointer.data ^ 1) == pointer.data + 1 && pointer != evenHead && pointer != evenTail){
 
-        evenTail.next = tempOddHead.next; //add the node to tail off even list.
+        evenTail.next = pointer; //add the node to tail off even list.
         evenTail = evenTail.next;  //update the tail of even list
-        tempOddHead.next = tempOddHead.next.next; //cut the connection of odd node from that even node which gets added to even list.
+
+        pointer = pointer.next; //move pointer to next node.
       }
 
-      else if(tempOddHead.next != null) //if its odd we just need to traverse, and do nothing.
-        tempOddHead = tempOddHead.next;
-
+      else{
+        if(pointer != evenHead && pointer != evenTail){
+          oddTail.next = pointer;  //add pointer to OddTail to make oddList.
+          oddTail = oddTail.next;  //update oddTail.next to be new list tail.
+        }
+        //if pointer.data is odd, then just traverse the list, no need to do anything else.
+        pointer = pointer.next; //move pointer forward.
+      }
     }
 
-    tempOddHead.next = evenHead;
-    evenTail.next = null;
-    return oddHead;
-
+    oddTail.next = evenHead; // join oddTail to evenHead.
+    evenTail.next = null; //make the last node of the newly made list to null.
+    return oddHead; //return head of the list.
   }
 }
 
