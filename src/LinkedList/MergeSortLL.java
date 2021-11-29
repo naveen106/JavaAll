@@ -57,7 +57,7 @@ class Solution{
 
 public class MergeSortLL {
 
-  public static void main(String[] args) {
+  public static void main(String[] args){
     LinkedListNode<Integer> head = new MakeLinkedList().MakeLinkedList();
     head = Solution.mergeSort(head);
 
