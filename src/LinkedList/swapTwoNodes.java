@@ -5,82 +5,130 @@ import java.util.Scanner;
 public class swapTwoNodes {
 
   static LinkedListNode<Integer> swapNodes(LinkedListNode<Integer> head, int i, int j) {
-    if(head == null || head.next == null)
+    //////////////// THIS PART OF CODE DOESN'T WORK WELL WITH (j-i = 1, i=0 and j = 1,2,3 maybe others too...but this part doesn't handle edge cases very well////////////
+//    if(head == null || head.next == null)
+//      return head;
+//
+//    if(i == j)
+//      return head;
+//
+//    //later, firstNode will point to the node which is just before the first node to be swapped.
+//    //secondNode for just before the second node to be swapped.
+//    LinkedListNode<Integer> firstNode = head, secondNode;
+//
+//    //this way i is always less than 0 and I can traverse the node through i only.
+//    if(i>j){
+//      int temp = i;
+//      i = j;
+//      j = temp;
+//    }
+//
+//    if(i == 0 && j != 2 && j != 1)//for edge case where i = 0.
+//      i = 1;
+//
+//    int count = 0;
+//
+//    //while loop will only run i is not zero or 1.
+//    if(i != 0 || i != 1)
+//      while(count < i-1){
+//        if(firstNode.next == null) //for case when i>listLength
+//          return null;
+//
+//        firstNode = firstNode.next;
+//        count++;
+//      }
+//
+//    //for edge case where j = i+1
+//        if(j == i+1 && i != 1){  //in case of i=0..i is = 1
+//            LinkedListNode<Integer> temp1 = firstNode.next;
+//            LinkedListNode<Integer> temp2 = firstNode.next.next;
+//
+//            temp1.next = temp2.next;
+//            temp2.next = temp1;
+//            firstNode.next = temp2;
+//            return head;
+//        }
+//
+//    count = i;
+//    secondNode = firstNode.next;
+//
+//    //LOOK CAREFULLY!! count starts from i, not zero.
+//    while(count < j-1){
+//      if(secondNode.next == null) //for case when j>listLength
+//        return null;
+//      secondNode = secondNode.next;
+//      count++;
+//    }
+//
+//    //for edge case where i = 0
+////    if(firstNode == head){
+////      LinkedListNode<Integer> swapNode = secondNode.next, temp2 = swapNode.next;
+////
+////      swapNode.next = firstNode.next.next;
+////      secondNode.next = firstNode; //or head.
+////      firstNode.next = temp2;
+////      return swapNode;
+////    }
+//
+//        LinkedListNode<Integer> swapNode1, swapNode2, address1, address2;
+//
+//        //setting reference of variable to appropriate node of the list.
+//        swapNode1 = firstNode.next;
+//        address1 = swapNode1.next; //address of node connected to swapNode1.
+//
+//        swapNode2 = secondNode.next;
+//        address2 = swapNode2.next;
+//
+//        //now do the swapping.
+//        firstNode.next = swapNode2;
+//        swapNode2.next = address1;
+//
+//        secondNode.next = swapNode1;
+//        swapNode1.next = address2;
+//
+//    return head;
+
+
+    ////////////////////NOW THE SOLUTION WHICH WORKS //////////////////////////////////////
+    if (head == null || head.next == null)
       return head;
 
-    if(i == j)
+    if (i == j)
       return head;
 
-    if(i<0)
-      return null;
-    //later, firstNode will point to the node which is just before the first node to be swapped.
-    //secondNode for just before the second node to be swapped.
-    LinkedListNode<Integer> firstNode = head, secondNode;
+    LinkedListNode<Integer> currentNode = head, prev = null;
+    LinkedListNode<Integer> firstNode = null, secondNode = null, firstNodePrev = null, secondNodePrev = null;
+    int pos = 0;
 
-    //this way I is always less than 0, and I can traverse the node through i only.
-    if(i>j){
-      int temp = i;
-      i = j;
-      j = temp;
-    }
-
-    if(i == 0)//for edge case where i = 0.
-      i = 1;
-
-    int count = 0;
-
-    //for edge case where i = 0.
-    if(i != 0 && i != 1)
-      while(count < i-1){
-        if(firstNode.next == null)return null;
-        firstNode = firstNode.next;
-        count++;
+    while (currentNode != null) {
+      if (pos == i) {
+        firstNodePrev = prev;
+        firstNode = currentNode;
+      } else if (pos == j) {
+        secondNodePrev = prev;
+        secondNode = currentNode;
       }
 
-    //for edge case where j = i+1
-    if(j == i+1){
-      LinkedListNode<Integer> temp1 = firstNode.next;
-      LinkedListNode<Integer> temp2 = firstNode.next.next;
-
-      temp1.next = temp2.next;
-      temp2.next = temp1;
-      firstNode.next = temp2;
-      return head;
+      prev = currentNode;
+      currentNode = currentNode.next;
+      pos++;
     }
 
-    count = i;
-    secondNode = firstNode.next;
+    if(firstNodePrev != null)
+    firstNodePrev.next = secondNode;
 
-    //focus here!!! count is starting from i, not zero, don't forget that.
-    while(count < j-1){
-      if(secondNode.next == null)return null;
-      secondNode = secondNode.next;
-      count++;
-    }
+    else
+    head = secondNode;
 
-    //for edge case where i = 0
-    if(i == 0 && firstNode == head){
-      LinkedListNode<Integer> swapNode = secondNode.next, temp2 = swapNode.next;
+    if(secondNodePrev != null)
+    secondNodePrev.next = firstNode;
 
-      swapNode.next = firstNode.next;
-      secondNode.next = firstNode; //or head.
-      firstNode.next = temp2;
-      return swapNode;
-    }
+    else
+    head = firstNode;
 
-    LinkedListNode<Integer> swapNode1, swapNode2, address1, address2;
-
-    swapNode1 = firstNode.next;
-    address1 = swapNode1.next;
-
-    swapNode2 = secondNode.next;
-    address2 = swapNode2.next;
-
-    firstNode.next = swapNode2;
-    swapNode2.next = address1;
-
-    secondNode.next = swapNode1;
-    swapNode1.next = address2;
+    LinkedListNode<Integer> currentFirstNode = secondNode.next;
+    secondNode.next = firstNode.next;
+    firstNode.next = currentFirstNode;
 
     return head;
   }
