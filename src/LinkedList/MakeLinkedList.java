@@ -19,7 +19,7 @@ public class MakeLinkedList {
         current = current.next;
         num = input.nextInt();
     }
- //   input.close(); //if I close the Scanner..it shows 'No such element exception'. If I make two list consecutively, then it behaves like this. see 'MergeTwoSortedLL.java';
+ //   input.close(); //if I close the Scanner…it shows 'No such element exception'. If I make two list consecutively, then it behaves like this. see 'MergeTwoSortedLL.java';
     return head;
   }
 }
