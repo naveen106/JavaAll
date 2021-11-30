@@ -1,5 +1,7 @@
 package LinkedList;
 
+import java.util.Scanner;
+
 public class swapTwoNodes {
 
   static LinkedListNode<Integer> swapNodes(LinkedListNode<Integer> head, int i, int j) {
@@ -9,6 +11,8 @@ public class swapTwoNodes {
     if(i == j)
       return head;
 
+    if(i<0)
+      return null;
     //later, firstNode will point to the node which is just before the first node to be swapped.
     //secondNode for just before the second node to be swapped.
     LinkedListNode<Integer> firstNode = head, secondNode;
@@ -83,7 +87,11 @@ public class swapTwoNodes {
 
   public static void main(String[] args) {
     LinkedListNode<Integer> head = new MakeLinkedList().MakeLinkedList();
-    head = swapNodes(head, 1, 4);
+    Scanner input = new Scanner(System.in);
+    System.out.println("Enter index of two nodes to be swapped:    ");
+
+    head = swapNodes(head, input.nextInt(), input.nextInt());
+    input.close();
 
     while(head != null){
       System.out.print(head.data + " ");
