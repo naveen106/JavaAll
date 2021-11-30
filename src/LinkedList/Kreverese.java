@@ -30,7 +30,7 @@ public class Kreverese {
     return tempHead;
   }
   public static void main(String[] args) {
-    LinkedListNode head = new MakeLinkedList().MakeLinkedList();
+    LinkedListNode<Integer> head = new MakeLinkedList().MakeLinkedList();
     while(head != null){
       System.out.print(head.data + " ");
       head = head.next;
