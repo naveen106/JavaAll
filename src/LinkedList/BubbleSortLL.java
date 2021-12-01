@@ -1,26 +1,26 @@
 package LinkedList;
 public class BubbleSortLL {
   //method overloading
-  static LinkedListNode<Integer> bubbleSort(LinkedListNode<Integer> head, LinkedListNode<Integer> tail, LinkedListNode<Integer>smallest){
-
-    if(head == smallest){
-      return head;
-    }
-
-    if(head.next == smallest){
-      return head;
-    }
-
-    LinkedListNode<Integer> temp = head.next, temp2;
-
-    if(head.next.data < head.data){
-      temp2 = head.next.next;
-      head.next = temp2;
-    }
-
-    temp = bubbleSort(head, tail, smallest);
-    return temp;
-  }
+//  static LinkedListNode<Integer> bubbleSort(LinkedListNode<Integer> head, LinkedListNode<Integer> tail, LinkedListNode<Integer>smallest){
+//
+//    if(head == smallest){
+//      return head;
+//    }
+//
+//    if(head.next == smallest){
+//      return head;
+//    }
+//
+//    LinkedListNode<Integer> temp = head.next, temp2;
+//
+//    if(head.next.data < head.data){
+//      temp2 = head.next.next;
+//      head.next = temp2;
+//    }
+//
+//    temp = bubbleSort(head, tail, smallest);
+//    return temp;
+//  }
 
   static LinkedListNode<Integer> bubbleSort(LinkedListNode<Integer> head){
     LinkedListNode<Integer>tail = null;  //come back here later if error, to check value of tail.
@@ -43,7 +43,7 @@ public class BubbleSortLL {
     }
 
     temp.next = bubbleSort(head);
-    //return temp;
+//    return temp;
     LinkedListNode<Integer>smallest  = head, pointer = head.next;
 
     while(pointer != null){
