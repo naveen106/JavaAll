@@ -14,6 +14,11 @@ public class BubbleSortLL {
     return smallest;
   }
   public static void main(String[] args) {
-
+    LinkedListNode<Integer> head = new MakeLinkedList().MakeLinkedList();
+    head = bubbleSort(head);
+    while(head != null){
+      System.out.print(head.data + " ");
+      head = head.next;
+    }
   }
 }
