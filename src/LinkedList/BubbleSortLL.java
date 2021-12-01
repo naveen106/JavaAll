@@ -43,18 +43,18 @@ public class BubbleSortLL {
     }
 
     temp.next = bubbleSort(head);
-//    return temp;
-    LinkedListNode<Integer>smallest  = head, pointer = head.next;
-
-    while(pointer != null){
-      if(pointer.data < smallest.data) //finding the smallest node to return at the end.
-      smallest = pointer;
-      pointer = pointer.next;
-    }
-
-    LinkedListNode<Integer> newHead = temp;
-    newHead = bubbleSort(temp, tail, smallest);
-    return newHead;
+    return temp;
+//    LinkedListNode<Integer>smallest  = head, pointer = head.next;
+//
+//    while(pointer != null){
+//      if(pointer.data < smallest.data) //finding the smallest node to return at the end.
+//      smallest = pointer;
+//      pointer = pointer.next;
+//    }
+//
+//    LinkedListNode<Integer> newHead = temp;
+//    newHead = bubbleSort(temp, tail, smallest);
+//    return newHead;
   }
 
   public static void main(String[] args) {
