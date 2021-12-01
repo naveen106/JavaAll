@@ -1,7 +1,8 @@
 package Recursion_II;
 //this problem is literally a headache...shit!
-public class JosephusProblem {
 
+public class JosephusProblem {
+/*
   static int findSafe(int start, int n, int k, int count) {
     if(k<1)
 
@@ -16,9 +17,9 @@ public class JosephusProblem {
   static int findSafe(int n, int k){
     return findSafe(0,n,k,k);
   }
-
+*/
 
   public static void main(String[] args){
-    System.out.print(findSafe(10, 3));
+    //System.out.print(findSafe(10, 3));
   }
 }
