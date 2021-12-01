@@ -1,44 +1,60 @@
 package LinkedList;
 public class BubbleSortLL {
+  //method overloading
+  static LinkedListNode<Integer> bubbleSort(LinkedListNode<Integer> head, LinkedListNode<Integer> tail, LinkedListNode<Integer>smallest){
+
+    if(head == smallest){
+      return head;
+    }
+
+    if(head.next == smallest){
+      return head;
+    }
+
+    LinkedListNode<Integer> temp = head.next, temp2;
+
+    if(head.next.data < head.data){
+      temp2 = head.next.next;
+      head.next = temp2;
+    }
+
+    temp = bubbleSort(head, tail, smallest);
+    return temp;
+  }
 
   static LinkedListNode<Integer> bubbleSort(LinkedListNode<Integer> head){
-    LinkedListNode<Integer> pointer = head.next, smallest = head, greatest = head;
+    LinkedListNode<Integer>tail = null;  //come back here later if error, to check value of tail.
+
+    if(head == null){
+      tail = head;
+      return head;
+    }
+
+    if(head.next == null) {
+      tail = head;
+      return head;
+    }
+
+    LinkedListNode<Integer> temp = head.next, temp2;
+
+    if(head.next.data < head.data){
+      temp2 = head.next.next;
+      head.next = temp2;
+    }
+
+    temp.next = bubbleSort(head);
+    //return temp;
+    LinkedListNode<Integer>smallest  = head, pointer = head.next;
+
     while(pointer != null){
-      if(pointer.data < smallest.data)
-        smallest = pointer;
-
-      else if(pointer.data > greatest.data)
-        greatest = pointer;
-
+      if(pointer.data < smallest.data) //finding the smallest node to return at the end.
+      smallest = pointer;
       pointer = pointer.next;
     }
 
-    LinkedListNode<Integer> swapFirst = head, startingHead;
-    if(head.next.data < head.data)
-      startingHead = head.next;
-    else
-      startingHead = head;
-
-  //  int runOnce = 1;
-    //1 iteration of bubble swapping of all the nodes.
-
-  /*   while(true){
-      if(swapFirst.data > swapFirst.next.data){
-        //swap
-        LinkedListNode<Integer> addressOfNext = swapFirst.next.next;
-        swapFirst.next.next = swapFirst; //connecting comparing node to swapFirst node.
-        swapFirst.next = addressOfNext; //connecting swapFirst node to next node of second comparing node.
-      }
-      else
-        swapFirst = swapFirst.next;
-      if(swapFirst.next == null)
-      break;
-    }*/
-
-
-
-
-    return startingHead;
+    LinkedListNode<Integer> newHead = temp;
+    newHead = bubbleSort(temp, tail, smallest);
+    return newHead;
   }
 
   public static void main(String[] args) {
