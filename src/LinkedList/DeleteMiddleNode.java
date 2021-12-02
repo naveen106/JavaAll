@@ -20,7 +20,7 @@ public class DeleteMiddleNode {
       return temp;
     }
 
-    LinkedListNode<Integer> slow = head, prevOfSlow = head, fast = head;
+    LinkedListNode<Integer> slow = head, prevOfSlow = head, fast = head.next;
 
     while(fast != null){//while(fast.next != null && fast.next.next != null){
 
