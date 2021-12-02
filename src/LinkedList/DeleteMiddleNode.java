@@ -1,4 +1,12 @@
 package LinkedList;
+/*
+* You have been given a singly Linked List of N nodes.
+* Your task is to delete the middle node of this List.
+* If there is no middle node in the list to delete, return an empty list (i.e. NULL).
+* If there are two middle nodes in the list, delete the first one.
+* Follow up :
+* Can you solve it in only one traversal of the Linked List using O(1) space?
+*/
 
 public class DeleteMiddleNode {
 
@@ -6,33 +14,26 @@ public class DeleteMiddleNode {
     if(head == null || head.next == null)
       return null;
 
-    LinkedListNode<Integer> slow = head, fast = head;
-
     if(head.next.next == null){
       LinkedListNode<Integer> temp = head.next;
       head.next = null; //breaking the connection of head node from second node, not just returning head.next.
       return temp;
     }
 
-    LinkedListNode<Integer> prevSlow = head;
+    LinkedListNode<Integer> slow = head, prevOfSlow = head, fast = head;
 
-    while(true){//while(fast.next != null && fast.next.next != null){
-      prevSlow = slow;
-      if(fast.next == null && fast.next.next == null)
+    while(fast != null){//while(fast.next != null && fast.next.next != null){
+
+      //if List length is even
+      if(fast.next == null)
         break;
-
+      prevOfSlow = slow;
       slow = slow.next;
       fast = fast.next.next;
     }
 
-//    //Node prevSlow = head;
-//
-//    while(prevSlow.next != slow)
-//      prevSlow = prevSlow.next;
-//
-//    prevSlow.next = slow.next;
-//    slow.next = null;
-    return prevSlow;
+    prevOfSlow.next = slow.next;
+    return head;
   }
 
   public static void main(String[] args) {
@@ -40,7 +41,7 @@ public class DeleteMiddleNode {
     head = deleteMidNode(head);
 
     while(head != null){
-      System.out.print(head + " ");
+      System.out.print(head.data + " ");
       head = head.next;
     }
   }
