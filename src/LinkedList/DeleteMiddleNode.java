@@ -32,7 +32,7 @@ public class DeleteMiddleNode {
       fast = fast.next.next;
     }
 
-    prevOfSlow.next = slow.next;
+    prevOfSlow.next = prevOfSlow.next.next;
     return head;
   }
 
